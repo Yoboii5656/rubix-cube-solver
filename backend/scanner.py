@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from util import classify_color_hsv, draw_color_label
+from backend.util import classify_color_hsv, draw_color_label
 
 FACE_NAMES = ['U (Top/Up)', 'R (Right)', 'F (Front)', 'D (Down)', 'L (Left)', 'B (Back)']
 FACE_KEYS  = ['U', 'R', 'F', 'D', 'L', 'B']
