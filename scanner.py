@@ -6,8 +6,8 @@ FACE_NAMES = ['U (Top/Up)', 'R (Right)', 'F (Front)', 'D (Down)', 'L (Left)', 'B
 FACE_KEYS  = ['U', 'R', 'F', 'D', 'L', 'B']
 
 # Grid: sample 9 cells from a 3x3 area centered in frame
-GRID_SIZE   = 180   # total grid width/height in pixels
-CELL_SIZE   = GRID_SIZE // 3
+GRID_SIZE = 180   # total grid width/height in pixels
+CELL_SIZE = GRID_SIZE // 3
 
 
 def get_grid_origin(frame):
@@ -25,10 +25,14 @@ def sample_face(frame):
         for col in range(3):
             cx = ox + col * CELL_SIZE + CELL_SIZE // 2
             cy = oy + row * CELL_SIZE + CELL_SIZE // 2
-            # Average a small patch for stability
-            patch = frame[cy-10:cy+10, cx-10:cx+10]
-            avg_color = patch.mean(axis=(0, 1)).astype(int).tolist()
-            face.append(classify_color_hsv(avg_color))
+
+            # Pass the full patch, not just the average pixel
+            patch = frame[cy-18:cy+18, cx-18:cx+18]
+
+            if patch.size == 0:   # edge-case: patch out of frame
+                face.append('?')
+            else:
+                face.append(classify_color_hsv(patch))
     return face  # list of 9 color chars, row-major
 
 
@@ -66,7 +70,6 @@ def scan_all_faces():
             break
 
         face_name = FACE_NAMES[face_index]
-        face_key  = FACE_KEYS[face_index]
 
         # Live preview of detected colors
         preview_colors = sample_face(frame)
@@ -82,7 +85,7 @@ def scan_all_faces():
 
         key = cv2.waitKey(1) & 0xFF
         if key == ord(' '):
-            cube_state[face_key] = preview_colors
+            cube_state[FACE_KEYS[face_index]] = preview_colors
             print(f"  Captured {face_name}: {preview_colors}")
             face_index += 1
         elif key == ord('q'):

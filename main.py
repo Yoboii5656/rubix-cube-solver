@@ -1,6 +1,6 @@
 import cv2
 from PIL import Image
-from util import get_limits, CUBE_COLORS_BGR
+from util import get_limits
 from scanner import scan_all_faces, FACE_KEYS
 
 
