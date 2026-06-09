@@ -10,7 +10,6 @@ A real-time Rubik's cube scanner and solver built with Python and OpenCV. It use
 - 🟥🟧🟨🟩🟦⬜ Classifies all 6 Rubik's cube colors (R, O, Y, G, B, W)
 - 🧩 Scans all 6 faces interactively via live grid overlay
 - 📋 Stores cube state in standard Kociemba notation
-- 🔍 Yellow object detector (original base feature)
 
 ---
 
@@ -49,12 +48,6 @@ pip install kociemba
 ```bash
 python main.py
 ```
-
-You'll be prompted to choose a mode:
-
-```
-1 - Yellow object detector
-2 - Scan Rubik's cube
 ```
 
 ### Scanning a Cube
