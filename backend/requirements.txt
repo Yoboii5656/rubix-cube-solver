@@ -2,3 +2,8 @@ opencv-python>=4.10.0
 numpy>=2.1.0
 kociemba
 Pillow>=9.2.0
+fastapi
+uvicorn
+opencv-python
+numpy
+kociemba
