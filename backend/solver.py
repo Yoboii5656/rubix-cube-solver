@@ -39,49 +39,49 @@ def face(f):
 U_MOVE = [
     [face(U)+0, face(U)+2, face(U)+8, face(U)+6],
     [face(U)+1, face(U)+5, face(U)+7, face(U)+3],
-    [face(F)+0, face(L)+0, face(B)+8, face(R)+2],
-    [face(F)+1, face(L)+1, face(B)+7, face(R)+1],
-    [face(F)+2, face(L)+2, face(B)+6, face(R)+0],
+    [face(R)+0, face(F)+0, face(L)+0, face(B)+0],
+    [face(R)+1, face(F)+1, face(L)+1, face(B)+1],
+    [face(R)+2, face(F)+2, face(L)+2, face(B)+2],
 ]
 
 D_MOVE = [
+    [face(R)+6, face(B)+6, face(L)+6, face(F)+6],
+    [face(R)+7, face(B)+7, face(L)+7, face(F)+7],
+    [face(R)+8, face(B)+8, face(L)+8, face(F)+8],
     [face(D)+0, face(D)+2, face(D)+8, face(D)+6],
     [face(D)+1, face(D)+5, face(D)+7, face(D)+3],
-    [face(F)+6, face(R)+6, face(B)+2, face(L)+8],
-    [face(F)+7, face(R)+7, face(B)+1, face(L)+7],
-    [face(F)+8, face(R)+8, face(B)+0, face(L)+6],
 ]
 
 R_MOVE = [
+    [face(U)+2, face(B)+6, face(D)+2, face(F)+2],
+    [face(U)+5, face(B)+3, face(D)+5, face(F)+5],
+    [face(U)+8, face(B)+0, face(D)+8, face(F)+8],
     [face(R)+0, face(R)+2, face(R)+8, face(R)+6],
     [face(R)+1, face(R)+5, face(R)+7, face(R)+3],
-    [face(U)+2, face(F)+2, face(D)+2, face(B)+6],
-    [face(U)+5, face(F)+5, face(D)+5, face(B)+3],
-    [face(U)+8, face(F)+8, face(D)+8, face(B)+0],
 ]
 
 L_MOVE = [
+    [face(U)+0, face(F)+0, face(D)+0, face(B)+8],
+    [face(U)+3, face(F)+3, face(D)+3, face(B)+5],
+    [face(U)+6, face(F)+6, face(D)+6, face(B)+2],
     [face(L)+0, face(L)+2, face(L)+8, face(L)+6],
     [face(L)+1, face(L)+5, face(L)+7, face(L)+3],
-    [face(U)+0, face(B)+8, face(D)+0, face(F)+0],
-    [face(U)+3, face(B)+5, face(D)+3, face(F)+3],
-    [face(U)+6, face(B)+2, face(D)+6, face(F)+6],
 ]
 
 F_MOVE = [
-    [face(F)+0, face(F)+2, face(F)+8, face(F)+6],
-    [face(F)+1, face(F)+5, face(F)+7, face(F)+3],
     [face(U)+6, face(R)+0, face(D)+2, face(L)+8],
     [face(U)+7, face(R)+3, face(D)+1, face(L)+5],
     [face(U)+8, face(R)+6, face(D)+0, face(L)+2],
+    [face(F)+0, face(F)+2, face(F)+8, face(F)+6],
+    [face(F)+1, face(F)+5, face(F)+7, face(F)+3],
 ]
 
 B_MOVE = [
+    [face(U)+0, face(L)+6, face(D)+8, face(R)+2],
+    [face(U)+1, face(L)+3, face(D)+7, face(R)+5],
+    [face(U)+2, face(L)+0, face(D)+6, face(R)+8],
     [face(B)+0, face(B)+2, face(B)+8, face(B)+6],
     [face(B)+1, face(B)+5, face(B)+7, face(B)+3],
-    [face(U)+2, face(L)+0, face(D)+6, face(R)+8],
-    [face(U)+1, face(L)+3, face(D)+7, face(R)+5],
-    [face(U)+0, face(L)+6, face(D)+8, face(R)+2],
 ]
 
 BASE_MOVES = {'U': U_MOVE, 'R': R_MOVE, 'F': F_MOVE, 'D': D_MOVE, 'L': L_MOVE, 'B': B_MOVE}
@@ -312,9 +312,6 @@ def solve_cube(cube_state: dict) -> dict:
         if error:
             return {"success": False, "error": error}
 
-        solution, stats = ida_star_solve(start)
-        
-        start = dict_to_tuple(cube_state)
         solution, stats = ida_star_solve(start)
 
         if solution is None:

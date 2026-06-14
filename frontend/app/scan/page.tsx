@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import CubeScanner from "@/components/CubeScanner";
 import CubeStateDisplay from "@/components/CubeState";
-import SolveResult from "@/components/SolveResult";
+import CubeSolutionPlayer from "@/components/CubeSolutionPlayer";
 import { solveCube, CubeState, FACE_ORDER } from "@/lib/api";
 
 // ─── PAGE STATES ──────────────────────────────────────────────────────────────
@@ -253,9 +253,10 @@ export default function ScanPage() {
 
           {/* Solution panel */}
           {status === "solved" && solution && (
-            <SolveResult
+            <CubeSolutionPlayer
               moves={solution.solution}
               moveCount={solution.move_count}
+              cubeState={cubeState as CubeState}
               onReset={handleReset}
             />
           )}
