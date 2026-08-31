@@ -11,7 +11,12 @@ app = FastAPI()
 # ─── CORS — allows Next.js frontend to call this API ─────────────────────────
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://*.vercel.app",  # Your Vercel deployments
+        "*",  # Allow all origins (or specify your frontend domain)
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
